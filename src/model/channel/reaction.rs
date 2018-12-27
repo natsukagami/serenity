@@ -341,13 +341,19 @@ impl From<char> for ReactionType {
     /// Reacting to a message with an apple:
     ///
     /// ```rust,no_run
-    /// # use serenity::{command, model::id::ChannelId};
+    /// # use serenity::client::Context;
+    /// # use serenity::framework::standard::{CommandResult, macros::command};
+    /// # use serenity::model::id::ChannelId;
     /// #
-    /// # command!(example(context) {
-    /// #   let message = ChannelId(0).message(&context.http, 0)?;
+    /// # #[command]
+    /// # fn example(context: &mut Context) -> CommandResult {
+    /// #   let message = ChannelId(0).message(0)?;
     /// #
     /// message.react(&context, '🍎')?;
-    /// # });
+    /// # Ok(())
+    /// # }
+    /// #
+    /// # fn main() {}
     /// ```
     fn from(ch: char) -> ReactionType { ReactionType::Unicode(ch.to_string()) }
 }
