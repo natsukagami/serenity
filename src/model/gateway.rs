@@ -71,14 +71,18 @@ impl Activity {
     /// Create a command that sets the current activity:
     ///
     /// ```rust,no_run
-    /// use serenity::framework::standard::Args;
     /// use serenity::model::gateway::Activity;
-    /// use serenity::command;
+    /// use serenity::framework::standard::{Args, CommandResult, macros::command};
+    /// use serenity::client::Context;
+    /// use serenity::model::channel::Message;
     ///
-    /// command!(activity(ctx, _msg, args) {
+    /// #[command]
+    /// fn activity(ctx: &mut Context, _msg: &Message, args: Args) -> CommandResult {
     ///     let name = args.message();
     ///     ctx.set_activity(Activity::playing(&name));
-    /// });
+    ///
+    ///     Ok(())
+    /// }
     /// #
     /// # fn main() {}
     /// ```
@@ -109,14 +113,20 @@ impl Activity {
     /// Create a command that sets the current streaming status:
     ///
     /// ```rust,no_run
-    /// use serenity::{command, framework::standard::Args, model::gateway::Activity};
+    /// use serenity::model::gateway::Activity;
+    /// use serenity::framework::standard::{Args, CommandResult, macros::command};
+    /// use serenity::client::Context;
+    /// use serenity::model::channel::Message;
     ///
-    /// // Assumes command has min_args set to 2.
-    /// command!(stream(ctx, _msg, args) {
-    ///     # let stream_url = String::from("");
+    /// #[command]
+    /// fn stream(ctx: &mut Context, _msg: &Message, args: Args) -> CommandResult {
+    ///     const STREAM_URL: &str = "...";
+    ///
     ///     let name = args.message();
-    ///     ctx.set_activity(Activity::streaming(&name, &stream_url));
-    /// });
+    ///     ctx.set_activity(Activity::streaming(&name, STREAM_URL));
+    ///
+    ///     Ok(())
+    /// }
     /// #
     /// # fn main() {}
     /// ```
@@ -146,12 +156,18 @@ impl Activity {
     /// Create a command that sets the current listening status:
     ///
     /// ```rust,no_run
-    /// use serenity::{command, framework::standard::Args, model::gateway::Activity};
+    /// use serenity::model::gateway::Activity;
+    /// use serenity::framework::standard::{Args, CommandResult, macros::command};
+    /// use serenity::client::Context;
+    /// use serenity::model::channel::Message;
     ///
-    /// command!(listen(ctx, _msg, args) {
+    /// #[command]
+    /// fn listen(ctx: &mut Context, _msg: &Message, args: Args) -> CommandResult {
     ///     let name = args.message();
     ///     ctx.set_activity(Activity::listening(&name));
-    /// });
+    ///
+    ///     Ok(())
+    /// }
     /// #
     /// # fn main() {}
     /// ```

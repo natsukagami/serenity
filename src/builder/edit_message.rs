@@ -15,9 +15,9 @@ use crate::utils::{self, VecMap};
 /// # use serenity::model::id::{ChannelId, MessageId};
 /// #
 /// # #[command]
-/// # fn example(context: &mut Context) -> CommandResult {
-/// # let mut message = ChannelId(7).message(MessageId(8)).unwrap();
-/// let _ = message.edit(&context, |m| {
+/// # fn example(ctx: &mut Context) -> CommandResult {
+/// # let mut message = ChannelId(7).message(&ctx.http, MessageId(8)).unwrap();
+/// let _ = message.edit(&ctx, |m| {
 ///     m.content("hello")
 /// });
 /// # Ok(())
